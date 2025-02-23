@@ -3,7 +3,7 @@
   import { goto, pushState } from '$app/navigation';
   import { page } from '$app/state';
   import Instructions from '../components/Instructions.svelte';
-  import TestControls from '../components/TestControls.svelte';
+  import PseudoControls from '../components/PseudoControls.svelte';
 
   const speeds = ['slow', 'medium', 'fast'];
   let showSpeedNotSelectedError = $state(false);
@@ -30,17 +30,23 @@
   }
 </script>
 
-<h1 class="text-zinc-900 font-bold text-2xl my-10">Vienna Test System simulator</h1>
+<h1 class="text-zinc-900 font-bold text-2xl my-10">
+    Vienna Test System simulator
+</h1>
 
-<div class="flex flex-col gap-20">
+<div class="flex flex-col gap-20 pb-10">
     <Instructions/>
-    <Controls/>
+    <PseudoControls/>
 
     <div class="flex flex-col items-center gap-4">
-        <p>Select speed of the test</p>
+        <p class="tracking-wide font-medium">
+            Select speed and press Start
+        </p>
+
         {#if showSpeedNotSelectedError}
             <p>You need to select a speed, before you can start the test.</p>
         {/if}
+
         <div class="grid grid-cols-3 grid-rows-1 gap-4">
             {#each speeds as speed}
                 <button class={[
@@ -60,4 +66,5 @@
         </button>
     </div>
 
+    <Controls/>
 </div>

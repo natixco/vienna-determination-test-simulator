@@ -13,10 +13,10 @@
                 Start the test by selecting a speed (Slow, Medium, or Fast) and clicking the "Start" button.
             </li>
             <li>
-                React to the colors appearing in the top two rows by pressing the matching colored button.
+                React to the colors appearing in the top two rows by pressing the matching key.
             </li>
             <li>
-                Press the pedals when the bottom left or right black circles turn White.
+                React to the bottom left or right black circles when they turn White by pressing the matching key.
             </li>
             <li>
                 Listen for sounds and press the correct corresponding button based on the tone (Deep Boop or High Beep).
