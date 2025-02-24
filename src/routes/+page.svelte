@@ -30,6 +30,10 @@
   }
 </script>
 
+<svelte:head>
+    <title>Vienna Test System simulator</title>
+</svelte:head>
+
 <h1 class="text-zinc-900 font-bold text-2xl my-10">
     Vienna Test System simulator
 </h1>
