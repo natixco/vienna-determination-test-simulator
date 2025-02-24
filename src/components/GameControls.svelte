@@ -1,10 +1,16 @@
 <script lang="ts">
+  import { locale, t } from '$lib/translations';
   import { goto, pushState } from '$app/navigation';
   import { page } from '$app/state';
   import { SPEED } from '$lib';
   import Button from './Button.svelte';
 
   const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
+  const speedLabels: Record<string, string> = {
+    slow: $t('SPEED.SLOW'),
+    medium: $t('SPEED.MEDIUM'),
+    fast: $t('SPEED.FAST')
+  };
   let showSpeedNotSelectedError = $state(false);
   let selectedSpeed = $state(page.url.searchParams.get('speed'));
 
@@ -24,18 +30,20 @@
     }
 
     const url = new URL(window.location.href);
-    url.pathname = 'test';
+    url.pathname = `${locale.get()}/test`;
     goto(url);
   }
 </script>
 
 <div class="flex flex-col items-center gap-4">
     <p class="tracking-wide font-medium">
-        Select speed and press Start
+        {$t('GAME_CONTROLS.INSTRUCTIONS')}
     </p>
 
     {#if showSpeedNotSelectedError}
-        <p>You need to select a speed, before you can start the test.</p>
+        <p>
+            {$t('GAME_CONTROLS.SPEED_NOT_SELECTED_ERROR')}
+        </p>
     {/if}
 
     <div class="grid grid-cols-3 grid-rows-1 gap-4">
@@ -46,7 +54,7 @@
             ]}
                     onclick={() => selectSpeed(speed)}>
                 <span class="font-medium text-sm tracking-wider">
-                    {speed}
+                    {speedLabels[speed]}
                 </span>
             </button>
         {/each}

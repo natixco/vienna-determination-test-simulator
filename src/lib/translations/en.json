@@ -1,0 +1,55 @@
+{
+  "TITLE": "Vienna Determination Test",
+  "INSTRUCTIONS": {
+    "DESCRIPTION": "This test evaluates your reaction time, coordination, and ability to respond correctly to visual and auditory stimuli, similar to tests used in driving aptitude assessments.",
+    "HOW_TO_PLAY": "How to Play",
+    "STEPS": {
+      "SPEED": "Start the test by selecting a speed (Slow, Medium, or Fast) and clicking the \"Start\" button.",
+      "COLORS": "When a colored circle appears in the top rows, press the corresponding color key.",
+      "PEDALS": "When one of the bottom circles (left or right) turns white, press the corresponding key.",
+      "SOUNDS": "When you hear a sound, press the key that matches the tone (deep or high).",
+      "TIMING": "You must respond to each signal before the next one appears."
+    },
+    "SCORING": {
+      "TITLE": "Scoring",
+      "DESCRIPTION": "Your score is based on:",
+      "ACCURACY": "Accuracy (correct responses)",
+      "SPEED": "Speed (average response time in milliseconds)"
+    }
+  },
+  "GAME_CONTROLS": {
+    "INSTRUCTIONS": "Select speed and press \"Start\"",
+    "SPEED_NOT_SELECTED_ERROR": "You need to select a speed, before you can start the test."
+  },
+  "SPEED": {
+    "SLOW": "Slow",
+    "MEDIUM": "Medium",
+    "FAST": "Fast"
+  },
+  "RESULTS": {
+    "TITLE": "Previous results",
+    "SPEED": "Speed",
+    "TOTAL": "Total signals",
+    "CORRECT": "Correct responses",
+    "AVG_RESPONSE": "Avg Response"
+  },
+  "KEYBINDINGS": {
+    "TITLE": "Controls",
+    "DEEP_TONE": "Deep tone (boop)",
+    "HIGH_TONE": "High tone (beep)",
+    "COLOR": {
+      "RED": "Red",
+      "BLUE": "Blue",
+      "WHITE": "White",
+      "GREEN": "Green",
+      "YELLOW": "Yellow"
+    },
+    "PEDAL": {
+      "LEFT": "Left pedal",
+      "RIGHT": "Right pedal"
+    },
+    "EDIT": "Edit",
+    "CANCEL_EDIT": "Cancel edit",
+    "PRESS_ANY_KEY": "Press any key to set the keybinding for"
+  }
+}

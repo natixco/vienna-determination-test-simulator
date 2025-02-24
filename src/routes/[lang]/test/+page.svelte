@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { t, locales, locale } from '$lib/translations';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
   import { COLORS, PEDALS, type Signal, SOUNDS, SPEED } from '$lib';
   import { type ControlId, type ControlOptions, loadControls } from '$lib/controls';
-  import Button from '../../components/Button.svelte';
+  import Button from '../../../components/Button.svelte';
   import { saveResult } from '$lib/results';
   import { goto } from '$app/navigation';
 
@@ -152,7 +153,7 @@
     }
 
     const url = new URL(window.location.href);
-    url.pathname = '';
+    url.pathname = locale.get();
     goto(url);
   }
 
@@ -206,43 +207,35 @@
 
 <svelte:window onkeydown={onWindowKeydown}/>
 
-{#if intervalId}
-    <div class="min-h-screen flex flex-col items-center justify-center w-full">
+<div class="min-h-screen flex flex-col items-center justify-center w-full">
 
-        <div class="flex flex-col items-center justify-center gap-15 w-full">
-            <div class="flex flex-col items-center justify-center gap-5 w-full">
-                {#each [topCircles, bottomCircles] as row}
-                    <div class="flex flex-row items-center justify-between w-full">
-                        {#each row as index}
-                            <div class={[
+    <div class="flex flex-col items-center justify-center gap-15 w-full">
+        <div class="flex flex-col items-center justify-center gap-5 w-full">
+            {#each [topCircles, bottomCircles] as row}
+                <div class="flex flex-row items-center justify-between w-full">
+                    {#each row as index}
+                        <div class={[
               'size-26 border border-stone-900 rounded-full',
               activeCircleIndex === index && activeSignal === 'color' ? getColorClass() : 'bg-stone-900'
             ]}></div>
-                        {/each}
-                    </div>
-                {/each}
-            </div>
+                    {/each}
+                </div>
+            {/each}
+        </div>
 
-            <div class="flex flex-row items-center justify-between w-full">
-                {#each ['left', 'right'] as side}
-                    <div class={[
+        <div class="flex flex-row items-center justify-between w-full">
+            {#each ['left', 'right'] as side}
+                <div class={[
                     'w-20 h-40 border border-stone-900 rounded-sm',
                     activeSignal === 'pedal' && activePedal === side ? 'bg-white' : 'bg-stone-900'
                   ]}></div>
-                {/each}
-            </div>
+            {/each}
         </div>
-
-        <div class="mt-40">
-            <Button label="Stop" size="base" onClick={() => stop()}/>
-        </div>
-
     </div>
-{:else}
-    <div class="text-lg space-y-2">
-        <div>Total: {score.total}</div>
-        <div>Correct: {score.correct}</div>
-        <div>Average Response Time: {getAverageResponseTime()}ms</div>
+
+    <div class="mt-40">
+        <Button label="Stop" size="base" onClick={() => stop()}/>
     </div>
-{/if}
+
+</div>
 

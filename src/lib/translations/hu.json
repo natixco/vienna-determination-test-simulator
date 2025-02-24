@@ -1,0 +1,55 @@
+{
+  "TITLE": "Determinációs Teszt (Vienna Determination Test)",
+  "INSTRUCTIONS": {
+    "DESCRIPTION": "Ez a teszt értékeli a reakcióidőt, a koordinációt és a vizuális és auditív ingerekre való helyes reagálási képességet, hasonlóan a járművezetői alkalmassági vizsgálatokon használt tesztekhez.",
+    "HOW_TO_PLAY": "Játékmenet",
+    "STEPS": {
+      "SPEED": "Válassz egy sebességet (Lassú, Közepes vagy Gyors), majd kattints a \"Start\" gombra.",
+      "COLORS": "Amikor egy színes kör jelenik meg a felső két sorban, nyomd meg a színhez tartozó megfelelő gombot.",
+      "PEDALS": "Amikor az alsó körök (bal vagy jobb) fehérre változnak, nyomd meg az oldalhoz megfelelő gombot.",
+      "SOUNDS": "Amikor hangot hallasz, nyomd meg a hangnak megfelelő gombot (mély vagy magas).",
+      "TIMING": "Minden jelre reagálnod kell, mielőtt a következő megjelenik."
+    },
+    "SCORING": {
+      "TITLE": "Pontozás",
+      "DESCRIPTION": "A pontszámod az alábbiakból tevődik össze:",
+      "ACCURACY": "Pontosság (helyes válaszok)",
+      "SPEED": "Sebesség (átlagos reakcióidő milliszekundumban)"
+    }
+  },
+  "GAME_CONTROLS": {
+    "INSTRUCTIONS": "Válassz sebességet, majd kattints a \"Start\" gombra",
+    "SPEED_NOT_SELECTED_ERROR": "A teszt indítása előtt választanod kell egy sebességet."
+  },
+  "SPEED": {
+    "SLOW": "Lassú",
+    "MEDIUM": "Közepes",
+    "FAST": "Gyors"
+  },
+  "RESULTS": {
+    "TITLE": "Korábbi eredmények",
+    "SPEED": "Sebesség",
+    "TOTAL": "Összes jel",
+    "CORRECT": "Helyes válaszok",
+    "AVG_RESPONSE": "Átl. reakcióidő"
+  },
+  "KEYBINDINGS": {
+    "TITLE": "Irányítás",
+    "DEEP_TONE": "Mély hang (boop)",
+    "HIGH_TONE": "Magas hang (beep)",
+    "COLOR": {
+      "RED": "Piros",
+      "BLUE": "Kék",
+      "WHITE": "Fehér",
+      "GREEN": "Zöld",
+      "YELLOW": "Sárga"
+    },
+    "PEDAL": {
+      "LEFT": "Bal pedál",
+      "RIGHT": "Jobb pedál"
+    },
+    "EDIT": "Módosítás",
+    "CANCEL_EDIT": "Mégse",
+    "PRESS_ANY_KEY": "Nyomj meg egy billentyűt a következőhöz:"
+  }
+}

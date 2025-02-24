@@ -1,17 +1,18 @@
 <script lang="ts">
   import { type ControlId, type ControlOptions, loadControls, saveControls } from '$lib/controls';
+  import { t } from '$lib/translations';
   import Button from './Button.svelte';
 
   const controlLabels: Record<ControlId, string> = {
-    soundDeep: 'Deep tone (boop)',
-    soundHigh: 'High tone (beep)',
-    colorRed: 'Red',
-    colorBlue: 'Blue',
-    colorWhite: 'White',
-    colorGreen: 'Green',
-    colorYellow: 'Yellow',
-    pedalLeft: 'Left pedal',
-    pedalRight: 'Right pedal',
+    soundDeep: $t('KEYBINDINGS.DEEP_TONE'),
+    soundHigh: $t('KEYBINDINGS.HIGH_TONE'),
+    colorRed: $t('KEYBINDINGS.COLOR.RED'),
+    colorBlue: $t('KEYBINDINGS.COLOR.BLUE'),
+    colorWhite: $t('KEYBINDINGS.COLOR.WHITE'),
+    colorGreen: $t('KEYBINDINGS.COLOR.GREEN'),
+    colorYellow: $t('KEYBINDINGS.COLOR.YELLOW'),
+    pedalLeft: $t('KEYBINDINGS.PEDAL.LEFT'),
+    pedalRight: $t('KEYBINDINGS.PEDAL.RIGHT'),
   };
 
   let controls = $state<Record<ControlId, { key: string; code: string; }>>(loadControls());
@@ -55,13 +56,12 @@
 <svelte:window onkeydown={onWindowKeydown}/>
 
 <div class="flex flex-col gap-4">
-    <h2 class="text-xl font-semibold">Controls</h2>
+    <h2 class="text-xl font-semibold">{$t('KEYBINDINGS.TITLE')}</h2>
     <div class="flex flex-col gap-2 w-full">
         {#if editingControlId}
             <div class="flex flex-col items-center w-full">
                 <p class="text-lg">
-                    Press any key to set the keybinding for <span
-                        class="font-bold">{controlLabels[editingControlId]}</span>.
+                    {$t('KEYBINDINGS.PRESS_ANY_KEY')} <span class="font-bold">{controlLabels[editingControlId]}</span>.
                 </p>
             </div>
         {/if}
@@ -85,9 +85,9 @@
                     <div class="flex flex-row items-center gap-4">
                         <p>{control[1].key}</p>
                         {#if editingControlId === control[0]}
-                            <Button label="Cancel edit" size="sm" onClick={() => cancelEdit()}/>
+                            <Button label={$t('KEYBINDINGS.CANCEL_EDIT')} size="sm" onClick={() => cancelEdit()}/>
                         {:else}
-                            <Button label="Edit" size="sm" onClick={() => startEdit(control[0])}/>
+                            <Button label={$t('KEYBINDINGS.EDIT')} size="sm" onClick={() => startEdit(control[0])}/>
                         {/if}
                     </div>
                 </div>
