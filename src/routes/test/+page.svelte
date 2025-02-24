@@ -34,7 +34,13 @@
     yellow: 'bg-yellow-500'
   };
 
-  let score = $state<{ total: number, correct: number }>({ total: 0, correct: 0 });
+  let score = $state<{
+    total: number;
+    correct: number;
+    responseTimes: number[];
+  }>({ total: 0, correct: 0, responseTimes: [] });
+
+  let signalStartTime = $state<number>();
 
   if (browser) {
     start();
@@ -71,7 +77,8 @@
   }
 
   function start(): void {
-    score = { total: 0, correct: 0 };
+    score = { total: 0, correct: 0, responseTimes: [] };
+    signalStartTime = undefined;
 
     soundDeepAudio = new Audio(`/sounds/soundDeep.wav`);
     soundHighAudio = new Audio(`/sounds/soundHigh.wav`);
@@ -84,6 +91,7 @@
       const normalizedSignalType = signalType >= 3 ? 0 : signalType;
       previousSignalType = normalizedSignalType;
 
+      signalStartTime = Date.now();
       score.total++;
 
       switch (normalizedSignalType) {
@@ -132,7 +140,7 @@
 
   function onWindowKeydown(event: KeyboardEvent) {
     const control = Object.entries(controls).find(([_, options]) => options.code === event.code) as [ControlId, ControlOptions] | undefined;
-    if (!control || !activeSignal) {
+    if (!control || !activeSignal || !signalStartTime) {
       return;
     }
 
@@ -149,9 +157,22 @@
       (activeSignal === 'sound' && ((controlId === 'soundDeep' && activeSound === 'soundDeep') ||
         (controlId === 'soundHigh' && activeSound === 'soundHigh')));
 
+
     if (isCorrect) {
       score.correct++;
+      score.responseTimes.push(Date.now() - signalStartTime);
     }
+
+    signalStartTime = undefined;
+  }
+
+  function getAverageResponseTime(): number {
+    if (score.responseTimes.length === 0) {
+      return 0;
+    }
+
+    const sum = score.responseTimes.reduce((acc, r) => acc + r, 0);
+    return Math.round(sum / score.responseTimes.length);
   }
 </script>
 
@@ -188,9 +209,10 @@
 
     <button onclick={() => stop()}>Stop</button>
 {:else}
-    <div class="text-lg mb-4">
-        Total: {score.total}
-        Correct: {score.correct}
+    <div class="text-lg space-y-2">
+        <div>Total: {score.total}</div>
+        <div>Correct: {score.correct}</div>
+        <div>Average Response Time: {getAverageResponseTime()}ms</div>
     </div>
 {/if}
 
