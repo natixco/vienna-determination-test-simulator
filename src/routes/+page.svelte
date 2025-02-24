@@ -6,6 +6,7 @@
   import PseudoControls from '../components/PseudoControls.svelte';
   import { SPEED } from '$lib';
   import Button from '../components/Button.svelte';
+  import Results from '../components/Results.svelte';
 
   const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
   let showSpeedNotSelectedError = $state(false);
@@ -26,7 +27,7 @@
       return;
     }
 
-    const url = new URL(window.location.href)
+    const url = new URL(window.location.href);
     url.pathname = 'test';
     goto(url);
   }
@@ -69,5 +70,6 @@
         <Button label="Start" size="base" onClick={() => tryStart()}/>
     </div>
 
+    <Results/>
     <Controls/>
 </div>

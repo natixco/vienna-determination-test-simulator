@@ -4,6 +4,8 @@
   import { COLORS, PEDALS, type Signal, SOUNDS, SPEED } from '$lib';
   import { type ControlId, type ControlOptions, loadControls } from '$lib/controls';
   import Button from '../../components/Button.svelte';
+  import { saveResult } from '$lib/results';
+  import { goto } from '$app/navigation';
 
   const speed = page.url.searchParams.get('speed') ?? SPEED.SLOW;
   const controls = loadControls();
@@ -40,7 +42,7 @@
     correct: number;
     responseTimes: number[];
   }>({ total: 0, correct: 0, responseTimes: [] });
-
+  let pressedAnyKey = $state(false);
   let signalStartTime = $state<number>();
 
   if (browser) {
@@ -92,6 +94,7 @@
       const normalizedSignalType = signalType >= 3 ? 0 : signalType;
       previousSignalType = normalizedSignalType;
 
+      pressedAnyKey = false;
       signalStartTime = Date.now();
       score.total++;
 
@@ -137,13 +140,33 @@
     previousColor = undefined;
     previousPedal = undefined;
     previousSound = undefined;
+
+    if (score.total > 0) {
+      saveResult({
+        timestamp: Date.now(),
+        total: score.total,
+        correct: score.correct,
+        averageResponseTime: getAverageResponseTime(),
+        speed
+      });
+    }
+
+    const url = new URL(window.location.href);
+    url.pathname = '';
+    goto(url);
   }
 
   function onWindowKeydown(event: KeyboardEvent) {
+    if (pressedAnyKey) {
+      return;
+    }
+
     const control = Object.entries(controls).find(([_, options]) => options.code === event.code) as [ControlId, ControlOptions] | undefined;
     if (!control || !activeSignal || !signalStartTime) {
       return;
     }
+
+    pressedAnyKey = true;
 
     const [controlId] = control;
 
