@@ -6,11 +6,6 @@
   import Button from './Button.svelte';
 
   const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
-  const speedLabels: Record<string, string> = {
-    slow: $t('SPEED.SLOW'),
-    medium: $t('SPEED.MEDIUM'),
-    fast: $t('SPEED.FAST')
-  };
   let showSpeedNotSelectedError = $state(false);
   let selectedSpeed = $state(page.url.searchParams.get('speed'));
 
@@ -33,6 +28,15 @@
     url.pathname = `${locale.get()}/test`;
     goto(url);
   }
+
+  function getSpeedLabel(speed: string): string {
+    const labels: Record<string, string> = {
+      slow: $t('SPEED.SLOW'),
+      medium: $t('SPEED.MEDIUM'),
+      fast: $t('SPEED.FAST')
+    }
+    return labels[speed];
+  }
 </script>
 
 <div class="flex flex-col items-center gap-4">
@@ -54,7 +58,7 @@
             ]}
                     onclick={() => selectSpeed(speed)}>
                 <span class="font-medium text-sm tracking-wider">
-                    {speedLabels[speed]}
+                    {getSpeedLabel(speed)}
                 </span>
             </button>
         {/each}

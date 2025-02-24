@@ -20,6 +20,6 @@ const config = ({
     ],
 });
 
-export const defaultLocale = 'en';
+export const defaultLocale = 'hu';
 
 export const { t, locale, locales, loading, addTranslations, loadTranslations, translations, setRoute, setLocale } = new i18n(config);

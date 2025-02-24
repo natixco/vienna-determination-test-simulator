@@ -3,11 +3,15 @@
   import { t } from '$lib/translations';
 
   const results = loadResults();
-    const speedLabels: Record<string, string> = {
+
+  function getSpeedLabel(speed: string): string {
+    const labels: Record<string, string> = {
       slow: $t('SPEED.SLOW'),
       medium: $t('SPEED.MEDIUM'),
       fast: $t('SPEED.FAST')
-    };
+    }
+    return labels[speed];
+  }
 </script>
 
 {#if results.length > 0}
@@ -22,7 +26,7 @@
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.SPEED')}</div>
-                            <div class="font-medium text-stone-900">{speedLabels[result.speed]}</div>
+                            <div class="font-medium text-stone-900">{getSpeedLabel(result.speed)}</div>
                         </div>
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.TOTAL')}</div>
