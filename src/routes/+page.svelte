@@ -34,11 +34,11 @@
 </script>
 
 <svelte:head>
-    <title>Vienna Test System simulator</title>
+    <title>Vienna Determination Test Simulator</title>
 </svelte:head>
 
 <h1 class="text-zinc-900 font-bold text-2xl my-10">
-    Vienna Test System simulator
+    Vienna Determination Test Simulator
 </h1>
 
 <div class="flex flex-col gap-20 pb-10">

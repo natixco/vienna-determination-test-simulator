@@ -8,7 +8,7 @@
     <div class="flex flex-col gap-4">
         <h2 class="text-xl font-semibold">Previous results</h2>
         <div class="grid grid-cols-1 gap-4">
-            {#each results.slice(-5).reverse() as result}
+            {#each results.reverse() as result}
                 <div class="bg-stone-200 p-4 rounded-sm border border-stone-400">
                     <div class="text-sm text-stone-600">
                         {new Date(result.timestamp).toLocaleString()}

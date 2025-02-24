@@ -201,37 +201,43 @@
 </script>
 
 <svelte:head>
-    <title>Vienna Test System simulator</title>
+    <title>Vienna Determination Test Simulator</title>
 </svelte:head>
 
 <svelte:window onkeydown={onWindowKeydown}/>
 
 {#if intervalId}
-    <div class="flex flex-col items-center justify-center gap-15 w-full">
-        <div class="flex flex-col items-center justify-center gap-5 w-full">
-            {#each [topCircles, bottomCircles] as row}
-                <div class="flex flex-row items-center justify-between w-full">
-                    {#each row as index}
-                        <div class={[
+    <div class="min-h-screen flex flex-col items-center justify-center w-full">
+
+        <div class="flex flex-col items-center justify-center gap-15 w-full">
+            <div class="flex flex-col items-center justify-center gap-5 w-full">
+                {#each [topCircles, bottomCircles] as row}
+                    <div class="flex flex-row items-center justify-between w-full">
+                        {#each row as index}
+                            <div class={[
               'size-26 border border-stone-900 rounded-full',
               activeCircleIndex === index && activeSignal === 'color' ? getColorClass() : 'bg-stone-900'
             ]}></div>
-                    {/each}
-                </div>
-            {/each}
-        </div>
+                        {/each}
+                    </div>
+                {/each}
+            </div>
 
-        <div class="flex flex-row items-center justify-between w-full">
-            {#each ['left', 'right'] as side}
-                <div class={[
-                    'size-30 border border-stone-900 rounded-full',
+            <div class="flex flex-row items-center justify-between w-full">
+                {#each ['left', 'right'] as side}
+                    <div class={[
+                    'w-20 h-40 border border-stone-900 rounded-sm',
                     activeSignal === 'pedal' && activePedal === side ? 'bg-white' : 'bg-stone-900'
                   ]}></div>
-            {/each}
+                {/each}
+            </div>
         </div>
-    </div>
 
-    <Button label="Stop" size="base" onClick={() => stop()}/>
+        <div class="mt-40">
+            <Button label="Stop" size="base" onClick={() => stop()}/>
+        </div>
+
+    </div>
 {:else}
     <div class="text-lg space-y-2">
         <div>Total: {score.total}</div>
