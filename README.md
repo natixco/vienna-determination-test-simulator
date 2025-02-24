@@ -1,6 +1,6 @@
 # Vienna Determination Test
 
-A web-based simulator of the Vienna Determination Test (DT), a cognitive assessment tool from the Vienna Test System commonly used in driving aptitude evaluations. This simulator tests reaction speed, attention, and stress tolerance through multiple-choice reactions to different stimuli.
+A web-based simulator of the Vienna Determination Test (DT), a cognitive assessment tool from the Vienna Test System commonly used in driving aptitude evaluations. This simulator tests reaction speed, attention, and stress tolerance through multiple-choice reactions to different stimuli. 
 
 This test is also used in Hungary as part of the PÁV (Pályaalkalmassági Vizsgálat) examination for professional drivers.
 

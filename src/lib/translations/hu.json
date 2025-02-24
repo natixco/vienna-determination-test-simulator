@@ -1,7 +1,7 @@
 {
   "TITLE": "Determinációs Teszt (Vienna Determination Test)",
   "INSTRUCTIONS": {
-    "DESCRIPTION": "Ez a teszt értékeli a reakcióidőt, a koordinációt és a vizuális és auditív ingerekre való helyes reagálási képességet, hasonlóan a járművezetői alkalmassági vizsgálatokon használt tesztekhez.",
+    "DESCRIPTION": "A Determinációs Teszt (DT) a Vienna Test System kognitív értékelő eszköze, amelyet gyakran használnak járművezetői alkalmassági vizsgálatokon. A teszt a reakcióidőt, a figyelmet és a stressz-toleranciát méri különböző ingerekre adott többszörös választási reakciókon keresztül. Ezt a tesztet Magyarországon a hivatásos gépjárművezetők PÁV (Pályaalkalmassági Vizsgálat) vizsgálatának részeként is használják.",
     "HOW_TO_PLAY": "Játékmenet",
     "STEPS": {
       "SPEED": "Válassz egy sebességet (Lassú, Közepes vagy Gyors), majd kattints a \"Start\" gombra.",
