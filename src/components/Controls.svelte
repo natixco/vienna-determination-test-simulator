@@ -1,14 +1,14 @@
 <script lang="ts">
   import { type ControlId, type ControlOptions, loadControls, saveControls } from '$lib/controls';
 
-  const controlLabels: Record<string, string> = {
+  const controlLabels: Record<ControlId, string> = {
     soundDeep: 'Deep tone (boop)',
     soundHigh: 'High tone (beep)',
-    red: 'Red',
-    blue: 'Blue',
-    white: 'White',
-    green: 'Green',
-    yellow: 'Yellow',
+    colorRed: 'Red',
+    colorBlue: 'Blue',
+    colorWhite: 'White',
+    colorGreen: 'Green',
+    colorYellow: 'Yellow',
     pedalLeft: 'Left pedal',
     pedalRight: 'Right pedal',
   };

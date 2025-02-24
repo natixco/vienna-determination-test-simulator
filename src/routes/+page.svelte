@@ -4,8 +4,9 @@
   import { page } from '$app/state';
   import Instructions from '../components/Instructions.svelte';
   import PseudoControls from '../components/PseudoControls.svelte';
+  import { SPEED } from '$lib';
 
-  const speeds = ['slow', 'medium', 'fast'];
+  const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
   let showSpeedNotSelectedError = $state(false);
   let selectedSpeed = $state(page.url.searchParams.get('speed'));
 
