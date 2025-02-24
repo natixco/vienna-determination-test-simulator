@@ -3,6 +3,7 @@
   import { browser } from '$app/environment';
   import { COLORS, PEDALS, type Signal, SOUNDS, SPEED } from '$lib';
   import { type ControlId, type ControlOptions, loadControls } from '$lib/controls';
+  import Button from '../../components/Button.svelte';
 
   const speed = page.url.searchParams.get('speed') ?? SPEED.SLOW;
   const controls = loadControls();
@@ -200,14 +201,14 @@
         <div class="flex flex-row items-center justify-between w-full">
             {#each ['left', 'right'] as side}
                 <div class={[
-        'size-30 border border-stone-900 rounded-full',
-        activeSignal === 'pedal' && activePedal === side ? 'bg-white' : 'bg-stone-900'
-      ]}></div>
+                    'size-30 border border-stone-900 rounded-full',
+                    activeSignal === 'pedal' && activePedal === side ? 'bg-white' : 'bg-stone-900'
+                  ]}></div>
             {/each}
         </div>
     </div>
 
-    <button onclick={() => stop()}>Stop</button>
+    <Button label="Stop" size="base" onClick={() => stop()}/>
 {:else}
     <div class="text-lg space-y-2">
         <div>Total: {score.total}</div>

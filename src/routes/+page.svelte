@@ -5,6 +5,7 @@
   import Instructions from '../components/Instructions.svelte';
   import PseudoControls from '../components/PseudoControls.svelte';
   import { SPEED } from '$lib';
+  import Button from '../components/Button.svelte';
 
   const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
   let showSpeedNotSelectedError = $state(false);
@@ -65,10 +66,7 @@
                 </button>
             {/each}
         </div>
-        <button class="h-10 px-10 bg-stone-900 text-stone-50 rounded-sm font-medium text-sm cursor-pointer tracking-wider"
-                onclick={() => tryStart()}>
-            Start
-        </button>
+        <Button label="Start" size="base" onClick={() => tryStart()}/>
     </div>
 
     <Controls/>
