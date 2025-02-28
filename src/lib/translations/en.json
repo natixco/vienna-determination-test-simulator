@@ -19,11 +19,12 @@
     }
   },
   "GAME_CONTROLS": {
-    "INSTRUCTIONS": "Configure test settings and press \"Start\"",
-    "SPEED_NOT_SELECTED_ERROR": "You need to select a speed, before you can start the test.",
+    "INSTRUCTIONS": "Configure test settings",
+    "DURATION_TITLE": "Duration",
     "DURATION_MINUTES": "minutes"
   },
   "SPEED": {
+    "TITLE": "Speed",
     "SLOW": "Slow",
     "MEDIUM": "Medium",
     "FAST": "Fast"
@@ -57,7 +58,7 @@
     "PRESS_ANY_KEY": "Press any key to set the keybinding for"
   },
   "TEST_MODE": {
-    "TITLE": "Test Mode",
+    "TITLE": "Test mode",
     "ADAPTIVE_SHORT": "Adaptive",
     "ACTION_SHORT": "Action",
     "REACTION_SHORT": "Reaction",

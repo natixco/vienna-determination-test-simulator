@@ -2,7 +2,7 @@
   import { t } from '$lib/translations/index.js';
   import Instructions from '../../components/Instructions.svelte';
   import PseudoSignalControls from '../../components/PseudoSignalControls.svelte';
-  import GameControls from '../../components/GameControls.svelte';
+  import TestSettings from '../../components/TestSettings.svelte';
   import Results from '../../components/Results.svelte';
   import Keybindings from '../../components/Keybindings.svelte';
   import LanguageSwitcher from '../../components/LanguageSwitcher.svelte';
@@ -22,7 +22,7 @@
 <div class="flex flex-col gap-20 pb-10">
     <Instructions/>
     <PseudoSignalControls/>
-    <GameControls/>
+    <TestSettings/>
     <Results/>
     <Keybindings/>
 </div>

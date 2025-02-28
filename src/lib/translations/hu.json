@@ -22,11 +22,12 @@
     }
   },
   "GAME_CONTROLS": {
-    "INSTRUCTIONS": "Állítsd be a teszt paramétereit, majd kattints a \"Start\" gombra",
-    "SPEED_NOT_SELECTED_ERROR": "A teszt indítása előtt választanod kell egy sebességet.",
+    "INSTRUCTIONS": "Teszt beállítások",
+    "DURATION_TITLE": "Időkorlát",
     "DURATION_MINUTES": "perc"
   },
   "SPEED": {
+    "TITLE": "Sebesség",
     "SLOW": "Lassú",
     "MEDIUM": "Közepes",
     "FAST": "Gyors"
