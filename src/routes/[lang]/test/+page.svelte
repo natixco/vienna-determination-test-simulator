@@ -7,15 +7,15 @@
   import Button from '../../../components/Button.svelte';
   import { saveResult } from '$lib/results';
   import { goto } from '$app/navigation';
+  import { Howl } from 'howler';
 
   const speed = page.url.searchParams.get('speed') ?? SPEED.SLOW;
   const controls = loadControls();
   const intervalTimeout = getIntervalTimeout(speed);
   const topCircles = Array.from({ length: 5 }, (_, i) => i);
   const bottomCircles = Array.from({ length: 5 }, (_, i) => i + 5);
-
-  let soundDeepAudio = $state<HTMLAudioElement>();
-  let soundHighAudio = $state<HTMLAudioElement>();
+  let deepSound: Howl;
+  let highSound: Howl;
 
   let intervalId = $state<number>();
 
@@ -47,6 +47,18 @@
   let signalStartTime = $state<number>();
 
   if (browser) {
+    deepSound = new Howl({
+      src: ['/sounds/soundDeep.wav'],
+      preload: true,
+      volume: 1.0
+    });
+    
+    highSound = new Howl({
+      src: ['/sounds/soundHigh.wav'],
+      preload: true,
+      volume: 1.0
+    });
+    
     start();
   }
 
@@ -84,9 +96,6 @@
     score = { total: 0, correct: 0, responseTimes: [] };
     signalStartTime = undefined;
 
-    soundDeepAudio = new Audio(`/sounds/soundDeep.wav`);
-    soundHighAudio = new Audio(`/sounds/soundHigh.wav`);
-
     intervalId = setInterval(() => {
       // 75% chance for color
       // 12.5% chance for pedal
@@ -118,11 +127,13 @@
           const sound = getRandomArrayElement(SOUNDS, previousSound);
           activeSound = sound;
           previousSound = sound;
+
           if (sound === 'soundDeep') {
-            soundDeepAudio!.play();
+            deepSound.play();
           } else {
-            soundHighAudio!.play();
+            highSound.play();
           }
+
           break;
       }
     }, intervalTimeout);
@@ -131,6 +142,9 @@
   function stop(): void {
     clearInterval(intervalId);
     intervalId = undefined;
+
+    deepSound?.stop();
+    highSound?.stop();
 
     activeSignal = undefined;
     activeColor = undefined;
@@ -181,7 +195,6 @@
         (controlId === 'pedalRight' && activePedal === 'right'))) ||
       (activeSignal === 'sound' && ((controlId === 'soundDeep' && activeSound === 'soundDeep') ||
         (controlId === 'soundHigh' && activeSound === 'soundHigh')));
-
 
     if (isCorrect) {
       score.correct++;
