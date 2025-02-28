@@ -19,7 +19,8 @@
   },
   "GAME_CONTROLS": {
     "INSTRUCTIONS": "Select speed and press \"Start\"",
-    "SPEED_NOT_SELECTED_ERROR": "You need to select a speed, before you can start the test."
+    "SPEED_NOT_SELECTED_ERROR": "You need to select a speed, before you can start the test.",
+    "DURATION_MINUTES": "minutes"
   },
   "SPEED": {
     "SLOW": "Slow",

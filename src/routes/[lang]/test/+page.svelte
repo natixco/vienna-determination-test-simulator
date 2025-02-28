@@ -10,6 +10,7 @@
   import { Howl } from 'howler';
 
   const speed = page.url.searchParams.get('speed') ?? SPEED.SLOW;
+  const duration = parseInt(page.url.searchParams.get('duration') ?? '2', 10);
   const controls = loadControls();
   const intervalTimeout = getIntervalTimeout(speed);
   const topCircles = Array.from({ length: 5 }, (_, i) => i);
@@ -46,6 +47,9 @@
   let pressedAnyKey = $state(false);
   let signalStartTime = $state<number>();
 
+  let timeLeft = $state(duration * 60); // Convert minutes to seconds
+  let timerInterval = $state<number>();
+
   if (browser) {
     deepSound = new Howl({
       src: ['/sounds/soundDeep.wav'],
@@ -60,6 +64,7 @@
     });
     
     start();
+    startTimer();
   }
 
   function getRandomNumber(max: number, exclude?: number): number {
@@ -139,9 +144,20 @@
     }, intervalTimeout);
   }
 
+  function startTimer() {
+    timerInterval = setInterval(() => {
+      timeLeft--;
+      if (timeLeft <= 0) {
+        stop();
+      }
+    }, 1000);
+  }
+
   function stop(): void {
     clearInterval(intervalId);
+    clearInterval(timerInterval);
     intervalId = undefined;
+    timerInterval = undefined;
 
     deepSound?.stop();
     highSound?.stop();
@@ -212,6 +228,12 @@
     const sum = score.responseTimes.reduce((acc, r) => acc + r, 0);
     return Math.round(sum / score.responseTimes.length);
   }
+
+  function formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+  }
 </script>
 
 <svelte:head>
@@ -221,6 +243,9 @@
 <svelte:window onkeydown={onWindowKeydown}/>
 
 <div class="min-h-screen flex flex-col items-center justify-center w-full">
+    <div class="absolute top-4 right-4 text-2xl font-mono">
+        {formatTime(timeLeft)}
+    </div>
 
     <div class="flex flex-col items-center justify-center gap-15 w-full">
         <div class="flex flex-col items-center justify-center gap-5 w-full">

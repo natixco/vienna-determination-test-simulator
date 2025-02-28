@@ -8,6 +8,7 @@
   const speeds = [SPEED.SLOW, SPEED.MEDIUM, SPEED.FAST];
   let showSpeedNotSelectedError = $state(false);
   let selectedSpeed = $state(page.url.searchParams.get('speed'));
+  let durationMinutes = $state(2);
 
   function selectSpeed(speed: string) {
     selectedSpeed = speed;
@@ -26,6 +27,7 @@
 
     const url = new URL(window.location.href);
     url.pathname = `${locale.get()}/test`;
+    url.searchParams.set('duration', durationMinutes.toString());
     goto(url);
   }
 
@@ -63,5 +65,17 @@
             </button>
         {/each}
     </div>
+
+    <div class="flex items-center gap-2">
+        <input 
+            type="number" 
+            min="1" 
+            max="60"
+            bind:value={durationMinutes}
+            class="w-20 h-10 px-2 border border-stone-400 rounded-sm outline-none"
+        />
+        <span class="text-sm text-stone-600">{$t('GAME_CONTROLS.DURATION_MINUTES')}</span>
+    </div>
+
     <Button label="Start" size="base" onClick={() => tryStart()}/>
 </div> 

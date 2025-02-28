@@ -19,7 +19,8 @@
   },
   "GAME_CONTROLS": {
     "INSTRUCTIONS": "Válassz sebességet, majd kattints a \"Start\" gombra",
-    "SPEED_NOT_SELECTED_ERROR": "A teszt indítása előtt választanod kell egy sebességet."
+    "SPEED_NOT_SELECTED_ERROR": "A teszt indítása előtt választanod kell egy sebességet.",
+    "DURATION_MINUTES": "perc"
   },
   "SPEED": {
     "SLOW": "Lassú",
