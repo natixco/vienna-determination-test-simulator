@@ -19,30 +19,38 @@
         <h2 class="text-xl font-semibold">{$t('RESULTS.TITLE')}</h2>
         <div class="grid grid-cols-1 gap-4">
             {#each results.reverse() as result}
-                <div class="bg-stone-200 p-4 rounded-sm border border-stone-400">
+                <div class="bg-stone-200 p-4 rounded-sm border border-stone-400 flex flex-col gap-6">
                     <div class="text-sm text-stone-600">
                         {new Date(result.timestamp).toLocaleString()}
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-2">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.SPEED')}</div>
                             <div class="font-medium text-stone-900">{getSpeedLabel(result.speed)}</div>
                         </div>
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.TOTAL')}</div>
-                            <div class="font-medium text-stone-900">{result.total}</div>
+                            <div class="font-medium text-stone-900">{result.total ?? 0}</div>
                         </div>
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.CORRECT')}</div>
-                            <div class="font-medium text-stone-900">{result.correct}</div>
+                            <div class="font-medium text-stone-900">{result.correct ?? 0}</div>
                         </div>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.INCORRECT')}</div>
-                            <div class="font-medium text-stone-900">{result.incorrect}</div>
+                            <div class="font-medium text-stone-900">{result.incorrect ?? 0}</div>
                         </div>
                         <div>
-                            <div class="text-sm text-stone-600">{$t('RESULTS.AVG_RESPONSE')}</div>
-                            <div class="font-medium text-stone-900">{result.averageResponseTime}ms</div>
+                            <div class="text-sm text-stone-600">{$t('RESULTS.OMITTED')}</div>
+                            <div class="font-medium text-stone-900">{result.omitted ?? 0}</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-stone-600">{$t('RESULTS.RESPONSE_TIMES')}</div>
+                            <div class="font-medium text-stone-900">
+                                {result.averageResponseTime ?? 0}ms / {result.medianResponseTime ?? 0}ms
+                            </div>
                         </div>
                     </div>
                 </div>

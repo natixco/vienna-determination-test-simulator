@@ -33,7 +33,8 @@
     "TOTAL": "Összes jel",
     "CORRECT": "Helyes válaszok",
     "INCORRECT": "Helytelen válaszok",
-    "AVG_RESPONSE": "Átl. reakcióidő"
+    "OMITTED": "Kihagyott válaszok",
+    "RESPONSE_TIMES": "Átlagos / Medián reakcióidő"
   },
   "KEYBINDINGS": {
     "TITLE": "Irányítás",

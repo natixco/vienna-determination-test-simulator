@@ -43,8 +43,9 @@
     total: number;
     correct: number;
     incorrect: number;
+    omitted: number;
     responseTimes: number[];
-  }>({ total: 0, correct: 0, incorrect: 0, responseTimes: [] });
+  }>({ total: 0, correct: 0, incorrect: 0, omitted: 0, responseTimes: [] });
   let pressedAnyKey = $state(false);
   let signalStartTime = $state<number>();
 
@@ -99,10 +100,14 @@
   }
 
   function start(): void {
-    score = { total: 0, correct: 0, incorrect: 0, responseTimes: [] };
+    score = { total: 0, correct: 0, incorrect: 0, omitted: 0, responseTimes: [] };
     signalStartTime = undefined;
 
     intervalId = setInterval(() => {
+      if (!pressedAnyKey && signalStartTime) {
+        score.omitted++;
+      }
+
       // 75% chance for color
       // 12.5% chance for pedal
       // 12.5% chance for sound
@@ -179,7 +184,9 @@
         total: score.total,
         correct: score.correct,
         incorrect: score.incorrect,
+        omitted: score.omitted,
         averageResponseTime: getAverageResponseTime(),
+        medianResponseTime: getMedianResponseTime(),
         speed
       });
     }
@@ -231,6 +238,19 @@
 
     const sum = score.responseTimes.reduce((acc, r) => acc + r, 0);
     return Math.round(sum / score.responseTimes.length);
+  }
+
+  function getMedianResponseTime(): number {
+    if (score.responseTimes.length === 0) {
+      return 0;
+    }
+
+    const sorted = [...score.responseTimes].sort((a, b) => a - b);
+    const middle = Math.floor(sorted.length / 2);
+
+    return sorted.length % 2 === 0
+      ? Math.round((sorted[middle - 1] + sorted[middle]) / 2)
+      : sorted[middle];
   }
 
   function formatTime(seconds: number): string {

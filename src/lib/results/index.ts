@@ -5,7 +5,9 @@ export type Result = {
   total: number;
   correct: number;
   incorrect: number;
+  omitted: number;
   averageResponseTime: number;
+  medianResponseTime: number;
   speed: string;
 }
 

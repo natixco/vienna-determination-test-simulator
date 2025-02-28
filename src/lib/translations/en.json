@@ -33,7 +33,8 @@
     "TOTAL": "Total signals",
     "CORRECT": "Correct responses",
     "INCORRECT": "Incorrect responses",
-    "AVG_RESPONSE": "Avg Response"
+    "OMITTED": "Omitted responses",
+    "RESPONSE_TIMES": "Average / Median response"
   },
   "KEYBINDINGS": {
     "TITLE": "Controls",
