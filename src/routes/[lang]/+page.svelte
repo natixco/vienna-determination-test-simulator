@@ -20,8 +20,8 @@
 </div>
 
 <div class="flex flex-col gap-20 pb-10">
-    <Instructions/>
     <PseudoSignalControls/>
+    <Instructions/>
     <TestSettings/>
     <Results/>
     <Keybindings/>
