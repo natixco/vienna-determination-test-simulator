@@ -2,7 +2,7 @@
   "TITLE": "Vienna Determination Test",
   "INSTRUCTIONS": {
     "DESCRIPTION": "The Vienna Determination Test (DT) is a cognitive assessment tool from the Vienna Test System commonly used in driving aptitude evaluations. It tests reaction speed, attention, and stress tolerance through multiple-choice reactions to different stimuli. This test is also used in Hungary as part of the PÁV (Pályaalkalmassági Vizsgálat) examination for professional drivers.",
-    "HOW_TO_PLAY": "How to Play",
+    "HOW_TO_PLAY": "Test instructions",
     "STEPS": {
       "MODE": "Choose a test mode",
       "SPEED": "Select a speed (Slow, Medium, or Fast) and click \"Start\".",
@@ -10,12 +10,6 @@
       "PEDALS": "When one of the bottom circles (left or right) turns white, press the corresponding key.",
       "SOUNDS": "When you hear a sound, press the key that matches the tone (deep or high).",
       "TIMING": "You must respond to each signal before the next one appears."
-    },
-    "SCORING": {
-      "TITLE": "Scoring",
-      "DESCRIPTION": "Your score is based on:",
-      "ACCURACY": "Accuracy (correct responses)",
-      "SPEED": "Speed (average response time in milliseconds)"
     }
   },
   "GAME_CONTROLS": {

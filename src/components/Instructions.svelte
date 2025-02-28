@@ -21,16 +21,4 @@
             <li>{$t('INSTRUCTIONS.STEPS.TIMING')}</li>
         </ul>
     </div>
-
-    <div class="flex flex-col gap-2">
-        <h2 class="text-xl font-semibold">
-            {$t('INSTRUCTIONS.SCORING.TITLE')}
-        </h2>
-
-        <p>{$t('INSTRUCTIONS.SCORING.DESCRIPTION')}</p>
-        <ul class="list-disc list-inside">
-            <li>{$t('INSTRUCTIONS.SCORING.ACCURACY')}</li>
-            <li>{$t('INSTRUCTIONS.SCORING.SPEED')}</li>
-        </ul>
-    </div>
 </div>
