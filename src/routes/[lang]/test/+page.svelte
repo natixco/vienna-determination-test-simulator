@@ -120,6 +120,10 @@
   }
 
   function stop(): void {
+    if (!pressedAnyKey && signalStartTime) {
+      score.total--;
+    }
+
     clearInterval(intervalId);
     clearInterval(timerInterval);
     intervalId = undefined;
