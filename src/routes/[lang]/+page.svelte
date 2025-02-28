@@ -3,9 +3,12 @@
   import Instructions from '../../components/Instructions.svelte';
   import PseudoSignalControls from '../../components/PseudoSignalControls.svelte';
   import TestSettings from '../../components/TestSettings.svelte';
-  import Results from '../../components/Results.svelte';
-  import Keybindings from '../../components/Keybindings.svelte';
   import LanguageSwitcher from '../../components/LanguageSwitcher.svelte';
+  import Keybindings from '../../components/Keybindings.svelte';
+  import Results from '../../components/Results.svelte';
+  import Tabs from '../../components/Tabs.svelte';
+
+  let activeTab = $state('keybindings');
 </script>
 
 <svelte:head>
@@ -23,6 +26,18 @@
     <PseudoSignalControls/>
     <Instructions/>
     <TestSettings/>
-    <Results/>
-    <Keybindings/>
+    <div>
+        <Tabs tabs={[
+                { id: 'keybindings', label: $t('KEYBINDINGS.TITLE') },
+                { id: 'results', label: $t('RESULTS.TITLE') }
+            ]}
+              {activeTab}
+              onTabChange={(id) => activeTab = id}
+        />
+        {#if activeTab === 'keybindings'}
+            <Keybindings/>
+        {:else}
+            <Results/>
+        {/if}
+    </div>
 </div>

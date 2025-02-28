@@ -55,8 +55,7 @@
 
 <svelte:window onkeydown={onWindowKeydown}/>
 
-<div class="flex flex-col gap-4">
-    <h2 class="text-xl font-semibold">{$t('KEYBINDINGS.TITLE')}</h2>
+<div class="flex flex-col gap-4 w-full">
     <div class="flex flex-col gap-2 w-full">
         {#if editingControlId}
             <div class="flex flex-col items-center w-full">
@@ -67,7 +66,7 @@
         {/if}
         <div class="flex flex-col gap-2 w-full">
             {#each getControlsWithType() as control}
-                <div class="flex flex-row items-center justify-between w-full p-4 rounded-sm border border-stone-400">
+                <div class="flex flex-row items-center justify-between w-full p-4 rounded-md border border-stone-400">
                     <div class="flex flex-row items-center gap-4">
                         <p>{controlLabels[control[0]]}</p>
                         {#if control[0] === 'soundDeep' || control[0] === 'soundHigh'}

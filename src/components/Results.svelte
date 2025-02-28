@@ -15,11 +15,10 @@
 </script>
 
 {#if results.length > 0}
-    <div class="flex flex-col gap-4">
-        <h2 class="text-xl font-semibold">{$t('RESULTS.TITLE')}</h2>
+    <div class="flex flex-col gap-4 w-full">
         <div class="grid grid-cols-1 gap-4">
             {#each results.reverse() as result}
-                <div class="bg-stone-200 p-4 rounded-sm border border-stone-400 flex flex-col gap-6">
+                <div class="bg-stone-200 p-4 rounded-md border border-stone-400 flex flex-col gap-6">
                     <div class="text-sm text-stone-600">
                         {new Date(result.timestamp).toLocaleString()}
                     </div>
@@ -56,5 +55,9 @@
                 </div>
             {/each}
         </div>
+    </div>
+{:else}
+    <div class="flex flex-col items-center justify-center text-center py-10">
+        <p class="text-stone-900">No test results yet. Complete a test to see your performance history here.</p>
     </div>
 {/if}

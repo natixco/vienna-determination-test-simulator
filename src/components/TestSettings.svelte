@@ -67,7 +67,7 @@
   }
 </script>
 
-<div class="flex flex-col items-center gap-8">
+<div class="flex flex-col items-center gap-6">
     <div class="text-center">
         <h2 class="text-xl font-semibold mb-2">
             {$t('GAME_CONTROLS.INSTRUCTIONS')}

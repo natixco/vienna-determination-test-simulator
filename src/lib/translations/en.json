@@ -33,7 +33,7 @@
     "RESPONSE_TIMES": "Average / Median response"
   },
   "KEYBINDINGS": {
-    "TITLE": "Controls",
+    "TITLE": "Keybindings",
     "DEEP_TONE": "Deep tone (boop)",
     "HIGH_TONE": "High tone (beep)",
     "COLOR": {
