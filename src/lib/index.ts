@@ -3,7 +3,7 @@ export type Signal = 'color' | 'pedal' | 'sound';
 export const TEST_MODE = {
   ADAPTIVE: 'adaptive',  // Speed adjusts based on performance
   ACTION: 'action',     // No time limit
-  REACTION: 'reaction'  // Fixed time limit (current implementation)
+  REACTION: 'reaction'  // Fixed time limit
 } as const;
 
 export type TestMode = typeof TEST_MODE[keyof typeof TEST_MODE];

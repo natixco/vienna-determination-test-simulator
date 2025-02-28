@@ -59,7 +59,7 @@
     "ADAPTIVE_SHORT": "Adaptív",
     "ACTION_SHORT": "Akció",
     "REACTION_SHORT": "Reakció",
-    "ADAPTIVE_DESC": "A sebesség igazodik a teljesítményhez",
+    "ADAPTIVE_DESC": "A jelek megjelenési sebessége igazodik a vizsgált személy teljesítményéhez",
     "ACTION_DESC": "Nincs időkorlát",
     "REACTION_DESC": "Fix időkorlát"
   }

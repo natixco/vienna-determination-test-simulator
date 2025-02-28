@@ -5,7 +5,10 @@ A web-based simulator of the Vienna Determination Test (DT), a cognitive assessm
 This test is also used in Hungary as part of the PÁV (Pályaalkalmassági Vizsgálat) examination for professional drivers.
 
 ## Features
-
+- Multiple modes
+  - Adaptive: The presentation speed adjusts to the performance level of the respondent
+  - Action: No time limit
+  - Reaction: Fixed time limit
 - Multiple speed settings (Slow, Medium, Fast)
 - Various stimuli types:
   - Color signals (Red, Blue, White, Green, Yellow)
@@ -14,16 +17,6 @@ This test is also used in Hungary as part of the PÁV (Pályaalkalmassági Vizsg
 - Customizable control bindings
 - Performance tracking (accuracy and response times)
 - Results history
-
-## How to play
-
-1. Select a speed level
-2. React to signals as they appear:
-   - Press matching color keys for colored circles
-   - Press pedal keys when left/right indicators turn white
-   - Press corresponding keys for high/low audio tones
-3. Try to respond as quickly and accurately as possible
-4. View your results after completing the test
 
 ## Used references
 - https://www.youtube.com/watch?v=OtfY4JJdYf0

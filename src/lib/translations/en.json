@@ -56,7 +56,7 @@
     "ADAPTIVE_SHORT": "Adaptive",
     "ACTION_SHORT": "Action",
     "REACTION_SHORT": "Reaction",
-    "ADAPTIVE_DESC": "Speed adjusts to your performance",
+    "ADAPTIVE_DESC": "The presentation speed adjusts to the performance level of the respondent",
     "ACTION_DESC": "No time limit",
     "REACTION_DESC": "Fixed time limit"
   }
