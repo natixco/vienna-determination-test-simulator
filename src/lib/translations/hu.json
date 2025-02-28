@@ -32,6 +32,7 @@
     "SPEED": "Sebesség",
     "TOTAL": "Összes jel",
     "CORRECT": "Helyes válaszok",
+    "INCORRECT": "Helytelen válaszok",
     "AVG_RESPONSE": "Átl. reakcióidő"
   },
   "KEYBINDINGS": {

@@ -32,6 +32,7 @@
     "SPEED": "Speed",
     "TOTAL": "Total signals",
     "CORRECT": "Correct responses",
+    "INCORRECT": "Incorrect responses",
     "AVG_RESPONSE": "Avg Response"
   },
   "KEYBINDINGS": {

@@ -42,8 +42,9 @@
   let score = $state<{
     total: number;
     correct: number;
+    incorrect: number;
     responseTimes: number[];
-  }>({ total: 0, correct: 0, responseTimes: [] });
+  }>({ total: 0, correct: 0, incorrect: 0, responseTimes: [] });
   let pressedAnyKey = $state(false);
   let signalStartTime = $state<number>();
 
@@ -98,7 +99,7 @@
   }
 
   function start(): void {
-    score = { total: 0, correct: 0, responseTimes: [] };
+    score = { total: 0, correct: 0, incorrect: 0, responseTimes: [] };
     signalStartTime = undefined;
 
     intervalId = setInterval(() => {
@@ -177,6 +178,7 @@
         timestamp: Date.now(),
         total: score.total,
         correct: score.correct,
+        incorrect: score.incorrect,
         averageResponseTime: getAverageResponseTime(),
         speed
       });
@@ -215,6 +217,8 @@
     if (isCorrect) {
       score.correct++;
       score.responseTimes.push(Date.now() - signalStartTime);
+    } else {
+      score.incorrect++;
     }
 
     signalStartTime = undefined;

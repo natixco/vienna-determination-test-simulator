@@ -4,6 +4,7 @@ export type Result = {
   timestamp: number;
   total: number;
   correct: number;
+  incorrect: number;
   averageResponseTime: number;
   speed: string;
 }

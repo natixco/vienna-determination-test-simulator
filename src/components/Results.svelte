@@ -23,7 +23,7 @@
                     <div class="text-sm text-stone-600">
                         {new Date(result.timestamp).toLocaleString()}
                     </div>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2">
+                    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-2">
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.SPEED')}</div>
                             <div class="font-medium text-stone-900">{getSpeedLabel(result.speed)}</div>
@@ -35,6 +35,10 @@
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.CORRECT')}</div>
                             <div class="font-medium text-stone-900">{result.correct}</div>
+                        </div>
+                        <div>
+                            <div class="text-sm text-stone-600">{$t('RESULTS.INCORRECT')}</div>
+                            <div class="font-medium text-stone-900">{result.incorrect}</div>
                         </div>
                         <div>
                             <div class="text-sm text-stone-600">{$t('RESULTS.AVG_RESPONSE')}</div>
