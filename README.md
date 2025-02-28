@@ -29,3 +29,4 @@ This test is also used in Hungary as part of the PÁV (Pályaalkalmassági Vizsg
 - https://www.youtube.com/watch?v=OtfY4JJdYf0
 - https://www.youtube.com/watch?v=p1xcpV29SDg
 - https://www.youtube.com/watch?v=Nc6jNrYep7U
+- https://lafayetteevaluation.com/products/determination-test-1year

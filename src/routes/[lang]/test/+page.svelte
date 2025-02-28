@@ -1,20 +1,22 @@
 <script lang="ts">
-  import { t, locales, locale } from '$lib/translations';
+  import { locale } from '$lib/translations';
   import { page } from '$app/state';
   import { browser } from '$app/environment';
-  import { COLORS, PEDALS, type Signal, SOUNDS, SPEED } from '$lib';
+  import { COLORS, PEDALS, type Signal, SOUNDS, SPEED, type Speed, TEST_MODE, type TestMode } from '$lib';
   import { type ControlId, type ControlOptions, loadControls } from '$lib/controls';
   import Button from '../../../components/Button.svelte';
   import { saveResult } from '$lib/results';
   import { goto } from '$app/navigation';
   import { Howl } from 'howler';
 
-  const speed = page.url.searchParams.get('speed') ?? SPEED.SLOW;
+  const speed = (page.url.searchParams.get('speed') ?? SPEED.SLOW) as Speed;
+  const mode = (page.url.searchParams.get('mode') ?? TEST_MODE.REACTION) as TestMode;
   const duration = parseInt(page.url.searchParams.get('duration') ?? '2', 10);
   const controls = loadControls();
   const intervalTimeout = getIntervalTimeout(speed);
   const topCircles = Array.from({ length: 5 }, (_, i) => i);
   const bottomCircles = Array.from({ length: 5 }, (_, i) => i + 5);
+
   let deepSound: Howl;
   let highSound: Howl;
 
@@ -49,8 +51,9 @@
   let pressedAnyKey = $state(false);
   let signalStartTime = $state<number>();
 
-  let timeLeft = $state(duration * 60); // Convert minutes to seconds
+  let timeLeft = $state(mode === TEST_MODE.REACTION ? duration * 60 : Infinity);
   let timerInterval = $state<number>();
+  let adaptiveIntervalTimeout = $state<number>(intervalTimeout);
 
   if (browser) {
     deepSound = new Howl({
@@ -58,15 +61,17 @@
       preload: true,
       volume: 1.0
     });
-    
+
     highSound = new Howl({
       src: ['/sounds/soundHigh.wav'],
       preload: true,
       volume: 1.0
     });
-    
+
     start();
-    startTimer();
+    if (mode === TEST_MODE.REACTION) {
+      startTimer();
+    }
   }
 
   function getRandomNumber(max: number, exclude?: number): number {
@@ -86,68 +91,17 @@
     return array[index];
   }
 
-  function getIntervalTimeout(speed: string): number {
-    const timeouts = {
+  function getIntervalTimeout(speed: Speed): number {
+    const timeouts: Record<Speed, number> = {
       [SPEED.SLOW]: 3000,
       [SPEED.MEDIUM]: 2000,
       [SPEED.FAST]: 1000
     };
-    return timeouts[speed] ?? 3000;
+    return timeouts[speed];
   }
 
   function getColorClass(): string {
     return COLOR_CLASSES[activeColor as any] ?? '';
-  }
-
-  function start(): void {
-    score = { total: 0, correct: 0, incorrect: 0, omitted: 0, responseTimes: [] };
-    signalStartTime = undefined;
-
-    intervalId = setInterval(() => {
-      if (!pressedAnyKey && signalStartTime) {
-        score.omitted++;
-      }
-
-      // 75% chance for color
-      // 12.5% chance for pedal
-      // 12.5% chance for sound
-      const signalType = getRandomNumber(8, previousSignalType);
-      const normalizedSignalType = signalType >= 3 ? 0 : signalType;
-      previousSignalType = normalizedSignalType;
-
-      pressedAnyKey = false;
-      signalStartTime = Date.now();
-      score.total++;
-
-      switch (normalizedSignalType) {
-        case 0:
-          activeSignal = 'color';
-          activeColor = getRandomArrayElement(COLORS, previousColor);
-          previousColor = activeColor;
-          activeCircleIndex = getRandomNumber(10);
-          break;
-
-        case 1:
-          activeSignal = 'pedal';
-          activePedal = getRandomArrayElement(PEDALS, previousPedal);
-          previousPedal = activePedal;
-          break;
-
-        case 2:
-          activeSignal = 'sound';
-          const sound = getRandomArrayElement(SOUNDS, previousSound);
-          activeSound = sound;
-          previousSound = sound;
-
-          if (sound === 'soundDeep') {
-            deepSound.play();
-          } else {
-            highSound.play();
-          }
-
-          break;
-      }
-    }, intervalTimeout);
   }
 
   function startTimer() {
@@ -157,6 +111,12 @@
         stop();
       }
     }, 1000);
+  }
+
+  function start(): void {
+    score = { total: 0, correct: 0, incorrect: 0, omitted: 0, responseTimes: [] };
+    signalStartTime = undefined;
+    intervalId = setInterval(generateSignal, intervalTimeout);
   }
 
   function stop(): void {
@@ -207,19 +167,8 @@
     }
 
     pressedAnyKey = true;
-
     const [controlId] = control;
-
-    const isCorrect =
-      (activeSignal === 'color' && ((controlId === 'colorRed' && activeColor === 'red') ||
-        (controlId === 'colorBlue' && activeColor === 'blue') ||
-        (controlId === 'colorGreen' && activeColor === 'green') ||
-        (controlId === 'colorYellow' && activeColor === 'yellow') ||
-        (controlId === 'colorWhite' && activeColor === 'white'))) ||
-      (activeSignal === 'pedal' && ((controlId === 'pedalLeft' && activePedal === 'left') ||
-        (controlId === 'pedalRight' && activePedal === 'right'))) ||
-      (activeSignal === 'sound' && ((controlId === 'soundDeep' && activeSound === 'soundDeep') ||
-        (controlId === 'soundHigh' && activeSound === 'soundHigh')));
+    const isCorrect = checkCorrectResponse(controlId);
 
     if (isCorrect) {
       score.correct++;
@@ -228,7 +177,70 @@
       score.incorrect++;
     }
 
+    adjustSpeed(isCorrect);
     signalStartTime = undefined;
+  }
+
+  function generateSignal() {
+    if (!pressedAnyKey && signalStartTime) {
+      score.omitted++;
+    }
+
+    // 75% chance for color
+    // 12.5% chance for pedal
+    // 12.5% chance for sound
+    const signalType = getRandomNumber(8, previousSignalType);
+    const normalizedSignalType = signalType >= 3 ? 0 : signalType;
+    previousSignalType = normalizedSignalType;
+
+    pressedAnyKey = false;
+    signalStartTime = Date.now();
+    score.total++;
+
+    switch (normalizedSignalType) {
+      case 0:
+        activeSignal = 'color';
+        activeColor = getRandomArrayElement(COLORS, previousColor);
+        previousColor = activeColor;
+        activeCircleIndex = getRandomNumber(10);
+        break;
+
+      case 1:
+        activeSignal = 'pedal';
+        activePedal = getRandomArrayElement(PEDALS, previousPedal);
+        previousPedal = activePedal;
+        break;
+
+      case 2:
+        activeSignal = 'sound';
+        const sound = getRandomArrayElement(SOUNDS, previousSound);
+        activeSound = sound;
+        previousSound = sound;
+
+        if (sound === 'soundDeep') {
+          deepSound.play();
+        } else {
+          highSound.play();
+        }
+        break;
+    }
+  }
+
+  function adjustSpeed(isCorrect: boolean) {
+    if (mode !== TEST_MODE.ADAPTIVE) {
+      return;
+    }
+
+    if (isCorrect) {
+      adaptiveIntervalTimeout = Math.max(500, adaptiveIntervalTimeout - 100);
+    } else {
+      adaptiveIntervalTimeout = Math.min(3000, adaptiveIntervalTimeout + 200);
+    }
+
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = setInterval(generateSignal, adaptiveIntervalTimeout);
+    }
   }
 
   function getAverageResponseTime(): number {
@@ -258,6 +270,18 @@
     const remainingSeconds = seconds % 60;
     return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
   }
+
+  function checkCorrectResponse(controlId: ControlId): boolean {
+    return (activeSignal === 'color' && ((controlId === 'colorRed' && activeColor === 'red') ||
+        (controlId === 'colorBlue' && activeColor === 'blue') ||
+        (controlId === 'colorGreen' && activeColor === 'green') ||
+        (controlId === 'colorYellow' && activeColor === 'yellow') ||
+        (controlId === 'colorWhite' && activeColor === 'white'))) ||
+      (activeSignal === 'pedal' && ((controlId === 'pedalLeft' && activePedal === 'left') ||
+        (controlId === 'pedalRight' && activePedal === 'right'))) ||
+      (activeSignal === 'sound' && ((controlId === 'soundDeep' && activeSound === 'soundDeep') ||
+        (controlId === 'soundHigh' && activeSound === 'soundHigh')));
+  }
 </script>
 
 <svelte:head>
@@ -267,9 +291,11 @@
 <svelte:window onkeydown={onWindowKeydown}/>
 
 <div class="min-h-screen flex flex-col items-center justify-center w-full">
-    <div class="absolute top-4 right-4 text-2xl font-mono">
-        {formatTime(timeLeft)}
-    </div>
+    {#if mode === TEST_MODE.REACTION}
+        <div class="absolute top-4 right-4 text-2xl font-mono">
+            {formatTime(timeLeft)}
+        </div>
+    {/if}
 
     <div class="flex flex-col items-center justify-center gap-15 w-full">
         <div class="flex flex-col items-center justify-center gap-5 w-full">

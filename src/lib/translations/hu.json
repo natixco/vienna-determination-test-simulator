@@ -4,6 +4,10 @@
     "DESCRIPTION": "A Determinációs Teszt (DT) a Vienna Test System kognitív értékelő eszköze, amelyet gyakran használnak járművezetői alkalmassági vizsgálatokon. A teszt a reakcióidőt, a figyelmet és a stressz-toleranciát méri különböző ingerekre adott többszörös választási reakciókon keresztül. Ezt a tesztet Magyarországon a hivatásos gépjárművezetők PÁV (Pályaalkalmassági Vizsgálat) vizsgálatának részeként is használják.",
     "HOW_TO_PLAY": "Játékmenet",
     "STEPS": {
+      "MODE": "Válassz teszt módot",
+      "MODE_ADAPTIVE": "Adaptív: A sebesség igazodik a teljesítményhez",
+      "MODE_ACTION": "Akció: Nincs időkorlát",
+      "MODE_REACTION": "Reakció: Fix időkorlát",
       "SPEED": "Válassz egy sebességet (Lassú, Közepes vagy Gyors), majd kattints a \"Start\" gombra.",
       "COLORS": "Amikor egy színes kör jelenik meg a felső két sorban, nyomd meg a színhez tartozó megfelelő gombot.",
       "PEDALS": "Amikor az alsó körök (bal vagy jobb) fehérre változnak, nyomd meg az oldalhoz megfelelő gombot.",
@@ -18,7 +22,7 @@
     }
   },
   "GAME_CONTROLS": {
-    "INSTRUCTIONS": "Válassz sebességet, majd kattints a \"Start\" gombra",
+    "INSTRUCTIONS": "Állítsd be a teszt paramétereit, majd kattints a \"Start\" gombra",
     "SPEED_NOT_SELECTED_ERROR": "A teszt indítása előtt választanod kell egy sebességet.",
     "DURATION_MINUTES": "perc"
   },
@@ -54,5 +58,14 @@
     "EDIT": "Módosítás",
     "CANCEL_EDIT": "Mégse",
     "PRESS_ANY_KEY": "Nyomj meg egy billentyűt a következőhöz:"
+  },
+  "TEST_MODE": {
+    "TITLE": "Teszt mód",
+    "ADAPTIVE_SHORT": "Adaptív",
+    "ACTION_SHORT": "Akció",
+    "REACTION_SHORT": "Reakció",
+    "ADAPTIVE_DESC": "A sebesség igazodik a teljesítményhez",
+    "ACTION_DESC": "Nincs időkorlát",
+    "REACTION_DESC": "Fix időkorlát"
   }
 }
