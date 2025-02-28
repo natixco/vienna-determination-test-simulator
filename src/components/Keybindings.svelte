@@ -1,6 +1,7 @@
 <script lang="ts">
   import { type ControlId, type ControlOptions, loadControls, saveControls } from '$lib/controls';
   import { t } from '$lib/translations';
+  import { Howl } from 'howler';
   import Button from './Button.svelte';
 
   const controlLabels: Record<ControlId, string> = {
@@ -13,6 +14,11 @@
     colorYellow: $t('KEYBINDINGS.COLOR.YELLOW'),
     pedalLeft: $t('KEYBINDINGS.PEDAL.LEFT'),
     pedalRight: $t('KEYBINDINGS.PEDAL.RIGHT'),
+  };
+
+  const sounds = {
+    soundDeep: new Howl({ src: ['/sounds/soundDeep.wav'] }),
+    soundHigh: new Howl({ src: ['/sounds/soundHigh.wav'] })
   };
 
   let controls = $state<Record<ControlId, { key: string; code: string; }>>(loadControls());
@@ -48,8 +54,9 @@
   }
 
   function playSound(controlId: ControlId) {
-    const audio = new Audio(`/sounds/${controlId as string}.wav`);
-    audio.play();
+    if (controlId === 'soundDeep' || controlId === 'soundHigh') {
+      sounds[controlId].play();
+    }
   }
 </script>
 
